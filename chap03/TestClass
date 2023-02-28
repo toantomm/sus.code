@@ -1,0 +1,22 @@
+package lec02;
+import utils.TextIO;
+import utils.TextIO.*;
+import static java.lang.System.*;
+public class Hello {
+
+    static int a=0;
+
+    public static void main(String[] args) {
+        // do sth
+        //TextIO.getFloat();
+        System.out.println("hello");
+        long a = 10;
+        int b = (int) (a+8*6);
+        System.out.println(args[1]);
+    }
+    public class InsideCLass{
+
+    }
+}
+
+

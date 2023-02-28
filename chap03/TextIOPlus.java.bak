@@ -1,0 +1,94 @@
+package exer.chap03;
+
+import utils.TextIOOld;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+
+public class TextIOPlus extends TextIOOld {
+    public TextIOPlus() {
+
+    }
+
+    /**
+     * TODO: code lại phần này để lấy text từ URL
+     * URL là: https://hanustartup.org/pr2/ch3/Hello.j
+     * @param urlString
+     * @return
+     */
+    public static String readTextFromURL(String urlString) {
+        URL url;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException var5) {
+            var5.printStackTrace();
+            return null;
+        }
+
+        InputStream ins;
+        try {
+            ins = url.openStream();
+        } catch (IOException var4) {
+            var4.printStackTrace();
+            return null;
+        }
+
+        TextIOOld.readStream(ins);
+        return readText();
+    }
+
+    private static String readText() {
+        StringBuffer fileBuf = new StringBuffer();
+        //char NL = true;
+
+        while (!TextIOOld.eof()) {
+            fileBuf.append(TextIOOld.getln()).append('\n');
+        }
+
+        return fileBuf.length() > 0 ? fileBuf.toString() : null;
+    }
+
+    public static String readTextFileContent(Class cls, String fileName) {
+        URL fileURL = cls.getResource(fileName);
+        if (fileURL == null) {
+            return null;
+        } else {
+            String filePath = fileURL.getPath();
+            TextIOOld.readFile(filePath);
+            StringBuffer fileBuf = new StringBuffer();
+            //char NL = true;
+
+            while (!TextIOOld.eof()) {
+                fileBuf.append(TextIOOld.getln()).append('\n');
+            }
+
+            return fileBuf.length() > 0 ? fileBuf.toString() : null;
+        }
+    }
+
+    public static String readTextFileContent(String filePath) {
+        TextIOOld.readFile(filePath);
+        StringBuffer fileBuf = new StringBuffer();
+        //char NL = true;
+
+        while (!TextIOOld.eof()) {
+            fileBuf.append(TextIOOld.getln()).append('\n');
+        }
+
+        return fileBuf.length() > 0 ? fileBuf.toString() : null;
+    }
+
+    public static String getString(String prompt) {
+        prompt = prompt.trim();
+        if (!prompt.endsWith(":")) {
+            System.out.println(prompt + ":");
+        } else {
+            System.out.println(prompt);
+        }
+
+        return getlnString();
+    }
+}
