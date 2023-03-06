@@ -20,7 +20,7 @@ public class CoffeeTinGame {
     /** the null character */
     private static final char NULL = '\u0000';
     /** the char 30-elements array containing BLUE, GREEN and REMOVED */
-    private static final  char [] BeansBag =
+    private static char [] BeansBag =
             {'B','G',' ','B','G',' ','B','G',' ','B','G',' ','B','G',' ',   // 5  -3
             'B','G',' ','B','G',' ','B','G',' ','B','G',' ','B','G',' ',};  // 5  -3
 
@@ -37,8 +37,8 @@ public class CoffeeTinGame {
      *      {@link TextIO#putf(String, Object...)}: print an error message
      */
     public static void main(String[] args) {
-          char [] tin = { BLUE, GREEN, GREEN, BLUE, BLUE, GREEN, GREEN, BLUE};
-          TextIO.putf("original Tin : "+ new String(tin));
+          char [] tin = { BLUE, GREEN, GREEN, GREEN, BLUE, BLUE, GREEN, GREEN, BLUE};
+          TextIO.putf("Original Tin : "+ new String(tin));
           //
         int green = 0;
         for (char bean : tin){
@@ -48,15 +48,13 @@ public class CoffeeTinGame {
         char expectedLastBean = (green % 2 == 0) ? 'B' : 'G';
           //
         char theLastBean = tinGame(tin);
-        TextIO.putf("after playing Tin : "+ new String(tin));
+        TextIO.putf("\nAfter playing Tin : "+ new String(tin));
         //
 
         if(expectedLastBean != theLastBean)
-            TextIO.putf("Error!");
+            TextIO.putf("\nError!");
         else
-            TextIO.putf(String.valueOf(theLastBean));
-
-
+            TextIO.putf("\n The last bean is : "+ String.valueOf(theLastBean));
     }
 
     /**
@@ -80,9 +78,9 @@ public class CoffeeTinGame {
 
         while (hasAtLeast2Beans ( tin )){
           //  !tin.equals(null) && tin.length > 0
-            char beans [] = { takeOne( tin ) , takeOne( tin ) };
+            char twoBeans [] = { takeOne( tin ) , takeOne( tin ) };  // or this can be replaced with takeTwo funtion
 //            check 2 beans then throw and put back one
-            updateTin( tin, beans);
+            updateTin( tin, twoBeans);
         }
         // if tin has only one bean or null
         return anyBean(tin);
@@ -129,8 +127,8 @@ public class CoffeeTinGame {
              while ( tin [index] == REMOVED ){ // repeat changing randomly until get bean
                 index = randInt(tin.length);
              }
-             char bean = tin [index];
-             tin [index] = REMOVED;
+             char bean = tin [index]; //get bean at random index
+             tin [index] = REMOVED;  // the set index (where I pick up bean ) to removed value
              return bean;
 
     }
@@ -158,22 +156,34 @@ public class CoffeeTinGame {
 //
 //                else
 ////                 throw B and put G back in tin
-        if (tin.length == 0 || twoBeans.length == 0 || twoBeans.length < 2) return;
+        if (tin.length == 0 || twoBeans.length == 0 || twoBeans.length < 2) return; // ?? return what
         if (twoBeans[0] == twoBeans[1]){
-            for (char bean : tin){
-                if (bean == REMOVED) {  // find a blank place to put B
-                    bean = getBean(BeansBag, BLUE); // put B back in tin from bag
+//            for (char bean : tin){
+//                if (bean == REMOVED) {  // find a blank place to put B
+//                    bean = getBean(BeansBag, BLUE); // put B back in tin from bag
+//                    break;
+//                }
+//            }
+            for (int i = 0; i < tin.length; i++){
+                if (tin[i] == REMOVED){
+                    tin[i] = getBean(BeansBag, BLUE);
                     break;
                 }
             }
         }
         else {
-                for (char bean : tin){
-                    if ( bean == REMOVED ){
-                        bean = getBean( BeansBag, GREEN);
-                        break;
-                    }
+//                for (char bean : tin){
+//                    if ( bean == REMOVED ){
+//                        bean = getBean( twoBeans, GREEN); //find a Green bean in twoBeans (this case: G-B)
+//                        break;
+//                    }
+//                }
+            for (int i = 0; i < tin.length; i++){
+                if (tin[i] == REMOVED){
+                    tin[i] = getBean(twoBeans, GREEN);
+                    break;
                 }
+            }
         }
 //        throw twoBeans
         twoBeans [0] = REMOVED;
