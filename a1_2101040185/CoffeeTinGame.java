@@ -93,7 +93,7 @@ public class CoffeeTinGame {
      *  else
      *    return false
      */
-    private static boolean hasAtLeast2Beans(char[] tin) {
+    public static boolean hasAtLeast2Beans(char[] tin) {
         int times = 0;  //count the available beans
         for (char c : tin){
             if ( c  != REMOVED )
@@ -104,15 +104,7 @@ public class CoffeeTinGame {
         return false;  // return instantly less than 2, mostly 1
     }
 
-    /**
-     * @requires tin has at least 2 beans left
-     * @modifies tin
-     * @effects
-     *  remove any two beans from tin and return them
-     */
-    private static char[] takeTwo(char[] tin) {
-        return null;
-    }
+  
 
     /**
      * @requires tin has at least one bean
@@ -149,6 +141,12 @@ public class CoffeeTinGame {
      *      put the green one back
      *  </tt>
      */
+     /**
+     * @requires tin has vacant positions for new beans
+     * @modifies tin
+     * @effects
+     *   place bean into any vacant position in tin
+     */
     public static void updateTin(char[] tin, char[] twoBeans) {
 //        if (beans[0] == beans[1])
 ////                throw both and put B from Bags to tin back
@@ -157,16 +155,11 @@ public class CoffeeTinGame {
 //                else
 ////                 throw B and put G back in tin
         if (tin.length == 0 || twoBeans.length == 0 || twoBeans.length < 2) return; // ?? return what
-        if (twoBeans[0] == twoBeans[1]){
-//            for (char bean : tin){
-//                if (bean == REMOVED) {  // find a blank place to put B
-//                    bean = getBean(BeansBag, BLUE); // put B back in tin from bag
-//                    break;
-//                }
-//            }
+        
+        if (twoBeans[0] == twoBeans[1]){        
             for (int i = 0; i < tin.length; i++){
-                if (tin[i] == REMOVED){
-                    tin[i] = getBean(BeansBag, BLUE);
+                if (tin[i] == REMOVED){// find a blank place to put B
+                    tin[i] = getBean(BeansBag, BLUE);// put B back in tin from bag
                     break;
                 }
             }
@@ -196,9 +189,7 @@ public class CoffeeTinGame {
      * @effects
      *   place bean into any vacant position in tin
      */
-    private static void putIn(char[] tin, char bean) {
-
-    }
+   
 
     /**
      * @effects
@@ -207,7 +198,7 @@ public class CoffeeTinGame {
      *  else
      *    return '\u0000' (null character)
      */
-    private static char anyBean(char[] tin) {
+    public static char anyBean(char[] tin) {
         for (char bean : tin){
             if (bean != REMOVED)  //find one bean left
 //                bean = REMOVED;   // take this out lastly
@@ -234,15 +225,6 @@ public class CoffeeTinGame {
      * @modifies: tin
      *
      */
-//    public static char theRestBean (char [] tin){
-//        for (char bean : tin){
-//            if (bean != REMOVED)  //find one bean left
-////                bean = REMOVED;   // take this out lastly
-//                return bean;
-//        }
-//        // none bean left
-//        return NULL;
-//    }
 
     /**
      *
