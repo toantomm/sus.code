@@ -1,0 +1,74 @@
+package hw5;
+
+public class Ex1 {
+
+   // After the user has selected a problem, the procedure must
+    //prompt the user to enter input data for the selected problem. Finally, it invokes the
+    //procedure defined for the selected problem, passing in the input data, and displays
+    //the result on the standard output.
+
+    
+    //
+    //if it contains the character NUL (the character ‘u0000’ in Java), assumed
+    //predefined as a constant, then that and any characters after it are not to be
+    //counted. In other words, NUL is understood as a terminator
+    //107
+    //4.6 Application Example: Coffee Tin Game
+    //(g). (*) median: find the median of an array of reals, that is the array value
+    //closest to the middle in the sense that as many array elements are smaller
+    //than it as are greater than it. Is the problem any easier if the array is known
+    //to be sorted?
+    //(h). compare: given two arbitrary arrays of reals, a and b, determine if a ⊂ b,
+    //a ⊃ b, a ∩ b, or a = b
+    //(i). freq: compute the frequencies of each element of an array of reals
+
+
+    /**  (a). countNegatives
+     * count the number of elements of an array of integers that
+     *  are negative
+     *
+     * @effetcs:   using loop to count negative elements
+     *               if array[i] < 0  then increase count variable by 1
+     *
+     */
+    /** (b). countEvens: count the number of even elements of an array of positive
+     *    integers
+     * @effects:  using loop to count even elements
+     *           if array [i] % 2 == 0 the increase count variable
+     *
+     */
+
+    /**(c). divArray: divide the elements of a real number array by a real number
+     *
+     * @modifies: real number array
+     * @effetcs:   array [i] = array [i] / (real number d)
+     *
+     */
+
+    /** (d). min: find the minimum element in an array of integers
+     * @effects: 
+     *           set min = array [0] (the first element, by default)
+     *           using loop
+     *              if (array[i] < min) then update min = array[i]
+     *
+     */
+    /**(e). isAscSorted: determine whether an array of integers is in ascending order
+     * @effects: if array.length == 0   return false
+     *           else 
+     *               using loop, start at 1
+     *                  if ( array [i] <  array[i-1] )
+     *                     return false
+     *              complete a loop without return false       
+     *               return true
+     */
+    /**
+     * (f). length: find the length of an array of CHARs on the understanding that if it contains the character NUL (the character ‘u0000’ in Java), assumed
+     *     predefined as a constant, then that and any characters after it are not to be
+     *     counted. In other words, NUL is understood as a terminator.
+     * @requires: array contains NUL character
+     * @effects:   set length = 0, by default
+     *             using loop
+     *                   Increase length by 1 until meeting NUL and return length
+     *
+     */
+}
